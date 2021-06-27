@@ -12,9 +12,9 @@ class kineticpay extends WC_Payment_Gateway {
 		add_action( 'woocommerce_api_callback', 'check_kineticpay_callback' );
 
 		$this->id = "kineticPay";
-		$this->method_title = __("kineticPay", 'kineticPay');
-		$this->method_description = __("Enable your customers to make payments securely via kineticPay.", 'kineticPay');
-		$this->title = __("kineticPay", 'kineticPay');
+		$this->method_title = __("kineticPay", 'kineticpay');
+		$this->method_description = __("Enable your customers to make payments securely via kineticPay.", 'kineticpay');
+		$this->title = __("kineticPay", 'kineticpay');
 		$this->icon = plugins_url('assets/kineticpay-logo-all.png', __FILE__);
 		$this->has_fields = true;
 		$this->init_form_fields();
@@ -38,37 +38,37 @@ class kineticpay extends WC_Payment_Gateway {
 
 		$this->form_fields = array(
 			'kp_enabled'        => array(
-				'title'   => __('Enable / Disable', 'kineticPay'),
-				'label'   => __('Enable this payment gateway', 'kineticPay'),
+				'title'   => __('Enable / Disable', 'kineticpay'),
+				'label'   => __('Enable this payment gateway', 'kineticpay'),
 				'type'    => 'checkbox',
 				'default' => 'no',
 			),
 
 			'title'          => array(
-				'title'    => __('Title', 'kineticPay'),
+				'title'    => __('Title', 'kineticpay'),
 				'type'     => 'text',
-				'default'  => __('kineticPay', 'kineticPay'),
+				'default'  => __('kineticPay', 'kineticpay'),
 			),
 
 			'description'    => array(
-				'title'    => __('Description', 'kineticPay'),
+				'title'    => __('Description', 'kineticpay'),
 				'type'     => 'textarea',
-				'default'  => __('Pay securely with kineticPay.', 'kineticPay'),
+				'default'  => __('Pay securely with kineticPay.', 'kineticpay'),
 				'css'      => 'max-width:350px;',
 			),
 
 			'merchant_key'      => array(
-				'title'    => __('Merchant Key', 'kineticPay'),
+				'title'    => __('Merchant Key', 'kineticpay'),
 				'type'     => 'text',
-				'desc_tip' => __('Required', 'kineticPay'),
-				'description' => __('Obtain your merchant key from your kineticPay dashboard.', 'kineticPay'),
+				'desc_tip' => __('Required', 'kineticpay'),
+				'description' => __('Obtain your merchant key from your kineticPay dashboard.', 'kineticpay'),
 			),
 			// Future if category implemented
 			/*'category_key' => array(
-				'title'    => __('Category Code', 'kineticPay'),
+				'title'    => __('Category Code', 'kineticpay'),
 				'type'     => 'text',
-				'desc_tip' => __('Required', 'kineticPay'),
-				'description' => __('Create a category at your kineticPay dashboard and fill in your category code here.', 'kineticPay'),
+				'desc_tip' => __('Required', 'kineticpay'),
+				'description' => __('Create a category at your kineticPay dashboard and fill in your category code here.', 'kineticpay'),
 			),*/
 		);
 	}
@@ -86,7 +86,7 @@ class kineticpay extends WC_Payment_Gateway {
 		$bankid = $customer_order->get_meta('_kineticpay_bank');
 
 		if($name == NULL || $phone == NULL || $email == NULL){
-			wc_add_notice( 'Error! Please complete your details (Name, phone, and e-mail are compulsory).', 'error' );
+			wc_add_notice( __( 'Error! Please complete your details (Name, phone, and e-mail are compulsory).', 'kineticpay' ), 'error' );
 			return;
 		}
 
@@ -154,7 +154,7 @@ class kineticpay extends WC_Payment_Gateway {
                 $customer_order->payment_complete();
                 wp_safe_redirect(add_query_arg( array(
                     'kp_notification' => 1,
-                    'kp_msg' => 'Payment Successful. Your payment has been successfully completed.',
+                    'kp_msg' => __('Payment Successful. Your payment has been successfully completed.', 'kineticpay'),
                     'kp_type' => 'success'),
                 $customer_order->get_checkout_order_received_url()));
             } else 
@@ -162,14 +162,14 @@ class kineticpay extends WC_Payment_Gateway {
                 $customer_order->add_order_note('Payment via kineticPay was failed.<br>Error code: ' . $result['code'] . '<br>Transaction ID: ' . $result['id']);
                 wp_safe_redirect(add_query_arg( array(
                     'kp_notification' => 1,
-                    'kp_msg' => 'Sorry, your payment failed. No charges were made.',
+                    'kp_msg' => __('Sorry, your payment failed. No charges were made.', 'kineticpay'),
                     'kp_type' => 'error'),
                 wc_get_checkout_url()));
             } else {
                 $customer_order->add_order_note('Payment via kineticPay was failed without code.');
                 wp_safe_redirect(add_query_arg( array(
                     'kp_notification' => 1,
-                    'kp_msg' => 'Sorry, your payment failed. No charges were made.',
+                    'kp_msg' => __('Sorry, your payment failed. No charges were made.', 'kineticpay'),
                     'kp_type' => 'error'),
                 wc_get_checkout_url()));
             }
