@@ -119,7 +119,7 @@ function kineticpay_check_bank() {
 add_action('woocommerce_checkout_create_order', 'kineticpay_write_to_meta_data', 10, 2 );
 function kineticpay_write_to_meta_data( $order, $data ) {
     if ( isset($_POST['kineticpay_bank']) && ! empty($_POST['kineticpay_bank']) ) {
-        $order->update_meta_data( '_kineticpay_bank' , esc_attr($_POST['kineticpay_bank']) );
+        $order->update_meta_data( '_kineticpay_bank' , sanitize_text_field($_POST['kineticpay_bank']) );
     }
 }
 
@@ -128,7 +128,7 @@ add_action('woocommerce_before_checkout_form','kineticpay_err_param');
 add_action('woocommerce_thankyou','kineticpay_err_param');
 function kineticpay_err_param() { 
     if (isset($_REQUEST['kp_notification'])) {
-        wc_print_notice($_REQUEST['kp_msg'], $_REQUEST['kp_type']);
+        wc_print_notice(esc_html( $_REQUEST['kp_msg'] ), esc_attr( $_REQUEST['kp_type'] ));
     }
 }
 

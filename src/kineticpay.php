@@ -102,7 +102,7 @@ class kineticpay extends WC_Payment_Gateway {
 	    do_action( 'woocommerce_loaded' );
 	    
 	    if (isset($_REQUEST['order'])){
-    	    $order_id = $_REQUEST['order'];
+    	    $order_id = absint( $_REQUEST['order'] );
     	    $customer_order = wc_get_order($order_id);
     	    
     	    if ($customer_order && $order_id != 0 && isset($_REQUEST['process'])){
@@ -142,7 +142,7 @@ class kineticpay extends WC_Payment_Gateway {
     	    }
 	    } else 
 	    if (isset($_REQUEST['fpx_sellerOrderNo'])){
-	        $fpxdata = explode("-", $_REQUEST['fpx_sellerOrderNo']);
+	        $fpxdata = explode("-", absint( $_REQUEST['fpx_sellerOrderNo']));
 	        $order_id = $fpxdata[1];
     	    $customer_order = wc_get_order($order_id);
     	    
