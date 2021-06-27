@@ -61,40 +61,40 @@ function kineticpay_bank_list( $description, $payment_id ){
     if( 'kineticPay' === $payment_id ){
         ob_start();
         $bank_name = array(
-            '' => 'Select Bank',
-            'ABMB0212' => 'Alliance Bank Malaysia Berhad',
-            'ABB0233' => 'Affin Bank Berhad',
-            //'ABB0234' => 'Affin Bank Berhad',
-            'AMBB0209' => 'AmBank (M) Berhad',
-            //'BPMBMYKL' => 'AGROBANK',
-            'BCBB0235' => 'CIMB Bank Berhad',
-            'BIMB0340' => 'Bank Islam Malaysia Berhad',
-            'BKRM0602' => 'Bank Kerjasama Rakyat Malaysia Berhad',
-            'BMMB0341' => 'Bank Muamalat (Malaysia) Berhad',
-            'BSN0601' => 'Bank Simpanan Nasional Berhad',
-            'CIT0219' => 'Citibank Berhad',
-            'HLB0224' => 'Hong Leong Bank Berhad',
-            //'HBMBMYKL' => 'HSBC Bank Malaysia Berhad',
-            'HSBC0223' => 'HSBC Bank Malaysia Berhad',
-            'KFH0346' => 'Kuwait Finance House',
-            'MB2U0227' => 'Maybank2u / Malayan Banking Berhad',
-            //'MBBEMYKL' => 'Maybank2u / Malayan Banking Berhad',
-            //'MBB0227' => 'Maybank2E / Malayan Banking Berhad E',
-            'MBB0228' => 'Maybank2E / Malayan Banking Berhad E',
-            'OCBC0229' => 'OCBC Bank (Malaysia) Berhad',
-            'PBB0233' => 'Public Bank Berhad',
-            //'RJHIMYKL' => 'AL RAJHI BANKING & INVESTMENT CORPORATION (MALAYSIA) BERHAD',
-            //'RHBBMYKL' => 'RHB Bank Berhad',
-            'RHB0218' => 'RHB Bank Berhad',
-            'SCB0216' => 'Standard Chartered Bank (Malaysia) Berhad',
-            'UOB0226' => 'United Overseas Bank (Malaysia) Berhad',
-            //'UOB0229' => 'United Overseas Bank (Malaysia) Berhad',
+            '' => __( 'Select Bank', 'kineticpay' ),
+            'ABMB0212' => __( 'Alliance Bank Malaysia Berhad', 'kineticpay' ),
+            'ABB0233' => __( 'Affin Bank Berhad', 'kineticpay' ),
+            //'ABB0234' => __( 'Affin Bank Berhad', 'kineticpay' ),
+            'AMBB0209' => __( 'AmBank (M) Berhad', 'kineticpay' ),
+            //'BPMBMYKL' => __( 'AGROBANK', 'kineticpay' ),
+            'BCBB0235' => __( 'CIMB Bank Berhad', 'kineticpay' ),
+            'BIMB0340' => __( 'Bank Islam Malaysia Berhad', 'kineticpay' ),
+            'BKRM0602' => __( 'Bank Kerjasama Rakyat Malaysia Berhad', 'kineticpay' ),
+            'BMMB0341' => __( 'Bank Muamalat (Malaysia) Berhad', 'kineticpay' ),
+            'BSN0601' => __( 'Bank Simpanan Nasional Berhad', 'kineticpay' ),
+            'CIT0219' => __( 'Citibank Berhad', 'kineticpay' ),
+            'HLB0224' => __( 'Hong Leong Bank Berhad', 'kineticpay' ),
+            //'HBMBMYKL' => __( 'HSBC Bank Malaysia Berhad', 'kineticpay' ),
+            'HSBC0223' => __( 'HSBC Bank Malaysia Berhad', 'kineticpay' ),
+            'KFH0346' => __( 'Kuwait Finance House', 'kineticpay' ),
+            'MB2U0227' => __( 'Maybank2u / Malayan Banking Berhad', 'kineticpay' ),
+            //'MBBEMYKL' => __( 'Maybank2u / Malayan Banking Berhad', 'kineticpay' ),
+            //'MBB0227' => __( 'Maybank2E / Malayan Banking Berhad E', 'kineticpay' ),
+            'MBB0228' => __( 'Maybank2E / Malayan Banking Berhad E', 'kineticpay' ),
+            'OCBC0229' => __( 'OCBC Bank (Malaysia) Berhad', 'kineticpay' ),
+            'PBB0233' => __( 'Public Bank Berhad', 'kineticpay' ),
+            //'RJHIMYKL' => __( 'AL RAJHI BANKING & INVESTMENT CORPORATION (MALAYSIA) BERHAD', 'kineticpay' ),
+            //'RHBBMYKL' => __( 'RHB Bank Berhad', 'kineticpay' ),
+            'RHB0218' => __( 'RHB Bank Berhad', 'kineticpay' ),
+            'SCB0216' => __( 'Standard Chartered Bank (Malaysia) Berhad', 'kineticpay' ),
+            'UOB0226' => __( 'United Overseas Bank (Malaysia) Berhad', 'kineticpay' ),
+            //'UOB0229' => __( 'United Overseas Bank (Malaysia) Berhad', 'kineticpay' ),
         );
 
         echo '<div class="kineticpay-bank" style="padding:10px 0;">';
         woocommerce_form_field( 'kineticpay_bank', array(
             'type'          => 'select',
-            'label'         => __("Choose Payment Method", "woocommerce"),
+            'label'         => __( 'Choose Payment Method", "kineticpay' ),
             'class'         => array('form-row-wide'),
             'required'      => true,
             'options'       => $bank_name,
@@ -111,7 +111,7 @@ add_action('woocommerce_checkout_process', 'kineticpay_check_bank' );
 function kineticpay_check_bank() {
     if ( isset($_POST['payment_method']) && $_POST['payment_method'] === 'kineticPay'
     && isset($_POST['kineticpay_bank']) && empty($_POST['kineticpay_bank']) ) {
-        wc_add_notice( __( 'Please select bank name for payment, please.' ), 'error' );
+        wc_add_notice( __( 'Please select bank name for payment, please.', 'kineticpay' ), 'error' );
     }
 }
 
@@ -119,7 +119,7 @@ function kineticpay_check_bank() {
 add_action('woocommerce_checkout_create_order', 'kineticpay_write_to_meta_data', 10, 2 );
 function kineticpay_write_to_meta_data( $order, $data ) {
     if ( isset($_POST['kineticpay_bank']) && ! empty($_POST['kineticpay_bank']) ) {
-        $order->update_meta_data( '_kineticpay_bank' , esc_attr($_POST['kineticpay_bank']) );
+        $order->update_meta_data( '_kineticpay_bank' , sanitize_text_field($_POST['kineticpay_bank']) );
     }
 }
 
@@ -128,7 +128,7 @@ add_action('woocommerce_before_checkout_form','kineticpay_err_param');
 add_action('woocommerce_thankyou','kineticpay_err_param');
 function kineticpay_err_param() { 
     if (isset($_REQUEST['kp_notification'])) {
-        wc_print_notice($_REQUEST['kp_msg'], $_REQUEST['kp_type']);
+        wc_print_notice(esc_html( $_REQUEST['kp_msg'] ), esc_attr( $_REQUEST['kp_type'] ));
     }
 }
 
@@ -141,7 +141,7 @@ function kineticpay_order_requery( $actions ) {
         return $actions;
     }
 
-    $actions['kineticpay_do_query'] = __( 'Requery payment status from kineticPay', 'kineticPay' );
+    $actions['kineticpay_do_query'] = __( 'Requery payment status from kineticPay', 'kineticpay' );
     return $actions;
 }
 
