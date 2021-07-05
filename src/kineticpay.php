@@ -131,7 +131,7 @@ class kineticpay extends WC_Payment_Gateway {
     	            $result = json_decode($getstatus["body"], true);
     	            if (array_key_exists('html', $result)){
     	                $customer_order->add_order_note('Customer made a payment attempt using bank ID '. $bankid .' via kineticPay.');
-            		    echo $result["html"];
+            		    esc_html_e( $result["html"] );
             		} else {
             		    wc_add_notice('Payment was declined. Something error with payment gateway, please contact store manager.', 'error');
 						//var_dump($result);
