@@ -128,6 +128,12 @@ class kineticpay extends WC_Payment_Gateway {
             		];
             		
                     $getstatus = wp_remote_get('https://manage.kineticpay.my/payment/create',array('body' => $data, 'method' => 'POST'));
+
+                    if ( is_wp_error( $getstatus ) ) {
+            		    wc_add_notice($response->get_error_message(), 'error');
+            		    wp_redirect(wc_get_checkout_url());
+                    }
+
     	            $result = json_decode($getstatus["body"], true);
     	            if (array_key_exists('html', $result)){
     	                $customer_order->add_order_note('Customer made a payment attempt using bank ID '. $bankid .' via kineticPay.');
