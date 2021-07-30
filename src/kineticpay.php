@@ -111,7 +111,7 @@ class kineticpay extends WC_Payment_Gateway {
                     $amount = $customer_order->get_total();
     	            $redirectURL = add_query_arg(array('wc-api' => 'kineticpay'), home_url('/'));
                     $secretkey = $this->merchant_key;
-                    $categorycode = $this->category_key;
+                    // $categorycode = $this->category_key;
 					$name = $customer_order->get_billing_first_name() . ' ' . $customer_order->get_billing_last_name();
 					$email = $customer_order->get_billing_email();
 					$phone = $customer_order->get_billing_phone();
