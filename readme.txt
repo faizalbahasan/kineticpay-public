@@ -2,7 +2,7 @@
 Contributors: faizalbahasan
 Tags: kineticpay, woocommerce, payment
 Requires at least: 4.6
-Tested up to: 5.6
+Tested up to: 5.8
 Stable tag: 1.0.0
 
 kineticPay payment gateway integration for WooCommerce.
