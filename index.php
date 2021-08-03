@@ -4,8 +4,8 @@
  * Plugin URI: https://kineticpay.my/
  * Description: Receive payment on your WooCommerce site via kineticPay.
  * Version: 1.0.0
- * Author: kineticPay
- * Author URI: https://kineticpay.my/
+ * Author: Kinetic Innovative Technologies Sdn Bhd
+ * Author URI: https://www.kitsb.com.my/
  * WC requires at least: 2.6.0
  * WC tested up to: 5.5.1
  **/
