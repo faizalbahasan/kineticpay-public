@@ -166,34 +166,36 @@ class kineticpay extends WC_Payment_Gateway {
 	        $fpxdata = explode("-", absint( $_REQUEST['fpx_sellerOrderNo']));
 	        $order_id = $fpxdata[1];
     	    $customer_order = wc_get_order($order_id);
-    	    
-    	    $getstatus = wp_remote_get('https://manage.kineticpay.my/payment/status?merchant_key='.$this->merchant_key.'&invoice=' . $order_id);
-    	    $result = json_decode($getstatus["body"], true);
-    	    
-            if (array_key_exists('code', $result) && $result['code'] == "00"){
-                $customer_order->add_order_note('Payment via kineticPay was succeed.<br>Transaction ID: ' . $result['id']);
-                $customer_order->payment_complete();
-                wp_safe_redirect(add_query_arg( array(
-                    'kp_notification' => 1,
-                    'kp_msg' => __('Payment Successful. Your payment has been successfully completed.', 'kineticpay'),
-                    'kp_type' => 'success'),
-                $customer_order->get_checkout_order_received_url()));
-            } else 
-            if (array_key_exists('code', $result)){
-                $customer_order->add_order_note('Payment via kineticPay was failed.<br>Error code: ' . $result['code'] . '<br>Transaction ID: ' . $result['id']);
-                wp_safe_redirect(add_query_arg( array(
-                    'kp_notification' => 1,
-                    'kp_msg' => __('Sorry, your payment failed. No charges were made.', 'kineticpay'),
-                    'kp_type' => 'error'),
-                wc_get_checkout_url()));
-            } else {
-                $customer_order->add_order_note('Payment via kineticPay was failed without code.');
-                wp_safe_redirect(add_query_arg( array(
-                    'kp_notification' => 1,
-                    'kp_msg' => __('Sorry, your payment failed. No charges were made.', 'kineticpay'),
-                    'kp_type' => 'error'),
-                wc_get_checkout_url()));
-            }
+
+    	    if ($customer_order) {
+	    	    $getstatus = wp_remote_get('https://manage.kineticpay.my/payment/status?merchant_key='.$this->merchant_key.'&invoice=' . $order_id);
+	    	    $result = json_decode($getstatus["body"], true);
+	    	    
+	            if (array_key_exists('code', $result) && $result['code'] == "00"){
+	                $customer_order->add_order_note('Payment via kineticPay was succeed.<br>Transaction ID: ' . $result['id']);
+	                $customer_order->payment_complete();
+	                wp_safe_redirect(add_query_arg( array(
+	                    'kp_notification' => 1,
+	                    'kp_msg' => __('Payment Successful. Your payment has been successfully completed.', 'kineticpay'),
+	                    'kp_type' => 'success'),
+	                $customer_order->get_checkout_order_received_url()));
+	            } else 
+	            if (array_key_exists('code', $result)){
+	                $customer_order->add_order_note('Payment via kineticPay was failed.<br>Error code: ' . $result['code'] . '<br>Transaction ID: ' . $result['id']);
+	                wp_safe_redirect(add_query_arg( array(
+	                    'kp_notification' => 1,
+	                    'kp_msg' => __('Sorry, your payment failed. No charges were made.', 'kineticpay'),
+	                    'kp_type' => 'error'),
+	                wc_get_checkout_url()));
+	            } else {
+	                $customer_order->add_order_note('Payment via kineticPay was failed without code.');
+	                wp_safe_redirect(add_query_arg( array(
+	                    'kp_notification' => 1,
+	                    'kp_msg' => __('Sorry, your payment failed. No charges were made.', 'kineticpay'),
+	                    'kp_type' => 'error'),
+	                wc_get_checkout_url()));
+	            }
+	        }
             
             exit();
         }
