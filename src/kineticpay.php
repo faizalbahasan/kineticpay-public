@@ -115,7 +115,7 @@ class kineticpay extends WC_Payment_Gateway {
 					$name = $customer_order->get_billing_first_name() . ' ' . $customer_order->get_billing_last_name();
 					$email = $customer_order->get_billing_email();
 					$phone = $customer_order->get_billing_phone();
-					$description = "Payment for Order No " .  $order_id . ", $name " . $email . ", Email " . $phone . ", Phone No. " . $phone;
+					$description = "Payment for Order No " .  $order_id . ", Buyer Name " . $name . ", Email " . $phone . ", Phone No. " . $phone;
                     
                     $data = [
             			'callback_success'  => $redirectURL,
