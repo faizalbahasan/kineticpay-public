@@ -19,7 +19,7 @@ Allows customer to pay for the order using kineticPay.
 2. Search plugins "kineticPay for WooCommerce" and click "Install Now".
 3. Activate the plugin.
 4. Update your API credentials in WooCommerce payments setting.
-
+5. Please makesure manage stock inventory on woocommerce has been enable, minimum stock is 2, if 0 stock, system will get an ERROR
 == Changelog ==
 
 = 1.0.0 - 2021-05-07 =
