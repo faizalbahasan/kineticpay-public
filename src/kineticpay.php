@@ -163,7 +163,7 @@ class kineticpay extends WC_Payment_Gateway {
     	    }
 	    } else 
 	    if (isset($_REQUEST['fpx_sellerOrderNo'])){
-	        $fpxdata = explode("-", absint( $_REQUEST['fpx_sellerOrderNo']));
+	        $fpxdata = explode("-", sanitize_text_field( $_REQUEST['fpx_sellerOrderNo']));
 	        $order_id = $fpxdata[1];
     	    $customer_order = wc_get_order($order_id);
 
